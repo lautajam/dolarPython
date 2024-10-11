@@ -1,26 +1,27 @@
 import requests
+from model.DolarBlue import DolarBlue
+from utils.functions import response_parser
 
-"""
-   {'moneda':
-    'casa': 
-    'nombre':
-    'compra':
-    'venta':
-    'fechaActualizacion':}
-"""
+def main():
+    try:
+        response = requests.get("https://dolarapi.com/v1/dolares/blue")
+        response.raise_for_status() 
+        currency, type_currency, sellValue, buyValue, date = response_parser(response)
+        
+        dolar_blue = DolarBlue(currency, type_currency, sellValue, buyValue, date)
+        dolar_blue.show_values()
 
-def response_parser(response):
-    resnse_json = response.json()
-    currency = resnse_json['moneda']
-    type = resnse_json['casa']
-    sellValue = resnse_json['venta']
-    buyValue  = resnse_json['compra']
-    print( f"La moneda es: {currency}")
-    print( f"El tipo de cambio es: {type}")
-    print( f"El valor de venta es: {sellValue}")
-    print( f"El valor de compra es: {buyValue}")
-
+    except requests.exceptions.RequestException as e:
+        print(f"Error fetching data: {e}")
 
 if __name__ == "__main__":
-    response = requests.get("https://dolarapi.com/v1/dolares/blue")
-    response_parser(response)
+    main()
+
+
+"""
+El siguiente trabajo es hacer que guarde todo en un csv para que lo pueda consultar el historico, de esta forma
+date - hour
+sellValue
+buyValue
+averageValue
+"""
