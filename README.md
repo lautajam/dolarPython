@@ -1,1 +1,1 @@
-# dolarPython: Python Quote Tracking Tool
+# dolarPython: Python Quote Tracking Tool.
