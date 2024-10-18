@@ -62,7 +62,7 @@ def eliminar_registro(fecha_hora_buscada):
     with open(archivo_csv, mode='w', newline='', encoding='utf-8') as archivo:
         escritor = csv.writer(archivo)
         escritor.writerows(filas)
-    print(f"Registro con fecha y hora {dolarBlue[0]} - {dolarBlue[1]} eliminado")
+    print(f"Registro con fecha y hora {fecha_hora_buscada[0]} - {fecha_hora_buscada[1]} eliminado")
 
 # Ejemplo de uso:
 
